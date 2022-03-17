@@ -2,11 +2,12 @@ header {
     width: 100%;
     height: 600px;
     position: relative;
-    border-bottom: 2px solid var(--main-action);
+    margin-bottom: 160px;
+    /* border-bottom: 2px solid var(--main-action); */
 }
 
 header .img {
-    background-color: var(--main-action);
+    /* background-color: var(--main-action); */
     width: 100%;
     height: 100%;
     position: absolute;
@@ -23,7 +24,8 @@ header .info {
     max-width: 600px;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: center;
+    z-index: 2;
 }
 
 header .info h1 {
@@ -40,7 +42,6 @@ header .info p {
 
 header .actions {
     display: flex;
-    margin-bottom: 50px;
 }
 
 header .actions button:nth-of-type(1) {

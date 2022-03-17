@@ -1,7 +1,7 @@
 nav {
     width: 100%;
-    background: var(--secondary-bg);
-    border-bottom: 2px solid var(--main-action);
+    /* background: var(--secondary-bg); */
+    /* border-bottom: 2px solid var(--main-action); */
     height: 80px;
 }
 
@@ -10,11 +10,13 @@ nav .container {
     justify-content: space-between;
     align-items: center;
     height: inherit;
+    z-index: 2;
+    position: relative;
 }
 
 nav .logo {
     font-size: 1.5rem;
-    color: var(--white);
+    color: var(--bg-main);
 }
 
 nav ul {
@@ -25,21 +27,32 @@ nav ul li {
     list-style: none;
     margin-left: 15px;
     font-size: 1.2rem;
-    cursor: pointer;
-    transition: 0.3s;
 }
 
 nav svg {
     width: 25px;
     margin-right: 10px;
     fill: var(--white);
+    transition: .3s;
 }
 
-nav ul li:hover {
-    opacity: 50%;
+nav li a:hover svg {
+    fill: var(--primary);
+}
+
+nav ul li a:hover {
+    border: 2px solid var(--white);
+    background-color: var(--white);
+    color: var(--primary);
 }
 
 nav li a {
+    cursor: pointer;
     display: flex;
     align-items: center;
+    border-radius: 5px;
+    padding: 5px 10px;
+    border: 2px solid var(--white);
+    transition: .3s;
+    font-weight: 600;
 }

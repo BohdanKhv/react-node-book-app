@@ -1,9 +1,10 @@
-import { Header } from "../components"
+import { Genres, Header } from "../components"
 
 const Main = () => {
     return (
         <>
             <Header />
+            <Genres />
         </>
     )
 }

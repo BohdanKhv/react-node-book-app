@@ -1,0 +1,48 @@
+.genres-list  {
+    padding-bottom: 160px;
+}
+
+.genres-list .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 30px;
+    justify-content: center;
+}
+
+.genres-list h2 {
+    grid-column: 1/-1;
+}
+
+.genres-list a {
+    min-height: 80px;
+    width: 100%;
+    border-radius: 5px;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    font-size: 1.3rem;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: var(--primary);
+    transition: .3s;
+    box-shadow: 5px 5px 15px 0 var(--black);
+}
+
+.genres-list a:hover {
+    opacity: 75%;
+}
+
+.genres-list a:active {
+    opacity: 50%;
+}
+
+.genres-list a h5 {
+    padding: 10px;
+}
+
+.genres-list a h6 {
+    font-weight: 400;
+    opacity: 75%;
+    padding: 0 10px 10px 10px;
+}

@@ -1,6 +1,7 @@
 :root {
     --danger: #e94949;
     --info: #58d4d4;
+    --primary: #ff0d55;
     --white: #ffffff;
     --black: #000000;
     --main-bg: #0e0e10;
@@ -59,6 +60,11 @@ input:focus {
     opacity: 50%;
 }
 
+.btn-primary {
+    background-color: var(--primary);
+    /* color: var(--black); */
+}
+
 .btn-danger {
     background-color: var(--danger);
     color: var(--white);
@@ -79,17 +85,65 @@ a {
     animation-iteration-count: infinite;
     animation-duration: 3s;
     animation-timing-function: ease;
-    animation-delay: calc(var(--order) * 200ms);
+    animation-delay: calc(var(--order) * 100ms);
 }
+
+.wave {
+    height: 160px;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    z-index: 1;
+}
+
+.layer-1 {
+    background-repeat: no-repeat;
+    background-image: url('./components/img/wave1.svg');
+    top: 0;
+}
+
+.layer-2 {
+    bottom: 0;
+    transform: rotate(180deg);
+    background-repeat: no-repeat;
+    background-image: url('./components/img/wave1.svg');
+}
+
+.layer-3 {
+    bottom: -160px;
+    background-repeat: no-repeat;
+    background-image: url('./components/img/wave1.svg');
+}
+
+.d-none {
+    display: none!important;
+}
+
+.genre-view {
+    margin: 150px 0;
+}
+
+.genre-view h1 {
+    text-align: center;
+}
+
 
 @keyframes opacity {
     0% {
-        opacity: 100%;
+        opacity: 90%;
     }
     50% {
-        opacity: 50%;
+        opacity: 25%;
     }
     100% {
-        opacity: 100%;
+        opacity: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
     }
 }

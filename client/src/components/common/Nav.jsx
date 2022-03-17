@@ -6,7 +6,7 @@ const Nav = () => {
         <nav>
             <div className="container">
                 <Link to={'/'} className="logo">
-                    <h1>BooksApp</h1>
+                    <h1>ScrapyShelves</h1>
                 </Link>
                 <ul className="navigation">
                     <li>
@@ -17,6 +17,7 @@ const Nav = () => {
                     </li>
                 </ul>
             </div>
+            <div className="wave layer-1"></div>
         </nav>
     )
 }

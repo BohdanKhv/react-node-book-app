@@ -1,0 +1,54 @@
+.books {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 25px;
+    margin: 150px 0;
+}
+
+.books h2 {
+    grid-column: 1/-1;
+}
+
+.books .book h3 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin: 25px;
+    text-align: center;
+}
+
+.books .book {
+    background-color: var(--secondary-bg);
+    border-radius: 5px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 5px 5px 15px 0 var(--black);
+}
+
+.books .book .img {
+    cursor: pointer;
+    width: 200px;
+    object-position: center;
+    border-radius: 5px;
+    margin: 0 35px 35px 35px;
+    box-shadow: 5px 5px 15px 0 var(--black);
+    background-color: var(--main-action);
+    transition: .3s;
+}
+
+.books .book.blink h3 {
+    height: 40px;
+    margin: 25px;
+    width: 75%;
+    background: var(--main-action);
+}
+
+.books .book.blink .img {
+    height: 300px;
+}
+
+.books .book .img:hover {
+    transform: scale(1.1);
+}

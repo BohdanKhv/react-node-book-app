@@ -3,7 +3,8 @@ import Header from './common/Header'
 import Footer from './common/Footer'
 import SearchForm from './content/SearchForm'
 import Card from './content/Card'
-import CardLoading from './content/CardLoading'
+import Genres from './content/Genres'
+import Book from './content/Book'
 
 export {
     Nav,
@@ -11,5 +12,6 @@ export {
     Footer,
     SearchForm,
     Card,
-    CardLoading,
+    Genres,
+    Book,
 }

@@ -7,7 +7,7 @@ const SearchForm = ({ setFoundBooks, setIsLoading }) => {
     const [query, setQuery] = useState('')
 
     const search = () => {
-        if(query != '') {
+        if(query !== '') {
             setIsLoading(true)
             searchBooks(query).then( 
                 (res) => {
@@ -20,7 +20,7 @@ const SearchForm = ({ setFoundBooks, setIsLoading }) => {
     return (
         <section className="search-form">
             <input type="text" placeholder="Search" value={query} onChange={(e) => setQuery(e.currentTarget.value)} />
-            <button className="btn" onClick={search}>Search</button>
+            <button className="btn btn-primary" onClick={search}>Search</button>
         </section>
     )
 }

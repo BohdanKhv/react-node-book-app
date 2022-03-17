@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { Main, Search } from './pages'
+import { GenreView, Main, Search } from './pages'
 import { Footer, Nav } from './components';
 
 function App() {
@@ -10,6 +10,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Main/>} />
           <Route path='/search' element={<Search/>} />
+          <Route path='/genre/:id' element={<GenreView/>} />
         </Routes>
         <Footer/>
       </Router>
