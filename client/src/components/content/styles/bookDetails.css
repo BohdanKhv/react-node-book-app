@@ -1,0 +1,144 @@
+.book-details {
+    margin: 100px 0;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    min-height: 700px;
+}
+
+.book-details .cover {
+    border-radius: 5px;
+    padding-right: 15px;
+}
+
+.book-details .cover,
+.book-details .info {
+    padding-top: 15px;
+}
+
+.book-details .cover .cover-img {
+    background-color: var(--dark);
+    width: 100%;
+    border-radius: 5px;
+}
+
+.book-details .cover .buy img {
+    margin-right: 10px;
+}
+
+.book-details .cover .buy a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+.book-details .info .title {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.book-details .info .author {
+    font-size: 1rem;
+    font-weight: 400;
+    font-style: italic;
+    padding-left: 15px;
+}
+
+.book-details .info .meta {
+    display: flex;
+    margin: 10px 0;
+    padding-left: 15px;
+}
+
+.book-details .info .more-details  p {
+    padding-left: 15px;
+    font-weight: 200;
+    margin: 0 0;
+}
+
+.book-details .info .description {
+    margin-top: 20px;
+}
+
+.book-details .info .description h5 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin: 5px 0;
+}
+
+.book-details .info .description p {
+    font-weight: 200;
+    padding-left: 10px;
+}
+
+.book-details .info .description b {
+    font-weight: 600;
+}
+
+.book-details .info .meta span {
+    margin-left: 5px;
+}
+
+.book-details .cover.blink {
+    height: 300px;
+}
+
+.book-details .info.blink {
+    height: 800px;
+    width: 100%;
+}
+
+.book-details .cover.blink .cover-img {
+    height: inherit;
+}
+
+.book-details .cover.blink .buy {
+    margin-top: 15px;
+    height: 80px;
+    background: var(--dark);
+    width: 100%;
+    border-radius: 5px;
+}
+
+.book-details .info.blink h1 {
+    height: 60px;
+    background: var(--dark);
+    width: 100%;
+    border-radius: 5px;
+}
+
+.book-details .info.blink h5 {
+    padding: 0;
+    margin-top: 15px;
+    height: 40px;
+    background: var(--dark);
+    width: 100%;
+    border-radius: 5px;
+}
+
+.book-details .info.blink .more-details {
+    padding: 0;
+    margin-top: 15px;
+    height: 600px;
+    background: var(--dark);
+    width: 100%;
+    border-radius: 5px;
+}
+
+@media (max-width: 576px) {
+    .book-details .cover {
+        grid-column: 1/-1;
+        padding-right: 0;
+    }
+
+    .book-details .info {
+        grid-column: 1/-1;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .book-details .info .meta {
+        justify-content: center;
+    }
+}

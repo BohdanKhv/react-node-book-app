@@ -24,9 +24,10 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: var(--primary);
+    background: var(--light);
+    color: var(--black);
     transition: .3s;
-    box-shadow: 5px 5px 15px 0 var(--black);
+    box-shadow: 5px 5px 15px 0 var(--pure-black);
 }
 
 .genres-list a:hover {

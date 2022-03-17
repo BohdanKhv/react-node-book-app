@@ -15,8 +15,16 @@ nav .container {
 }
 
 nav .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 1.5rem;
-    color: var(--bg-main);
+    color: var(--extra-extra-light);
+    transition: .3s;
+}
+
+nav .logo:hover {
+    color: var(--black);
 }
 
 nav ul {
@@ -32,18 +40,18 @@ nav ul li {
 nav svg {
     width: 25px;
     margin-right: 10px;
-    fill: var(--white);
+    fill: var(--extra-extra-light);
     transition: .3s;
 }
 
 nav li a:hover svg {
-    fill: var(--primary);
+    fill: var(--extra-extra-light);
 }
 
 nav ul li a:hover {
-    border: 2px solid var(--white);
-    background-color: var(--white);
-    color: var(--primary);
+    border: 2px solid var(--black);
+    background-color: var(--black);
+    color: var(--extra-light);
 }
 
 nav li a {
@@ -52,7 +60,8 @@ nav li a {
     align-items: center;
     border-radius: 5px;
     padding: 5px 10px;
-    border: 2px solid var(--white);
+    border: 2px solid var(--extra-extra-light);
     transition: .3s;
     font-weight: 600;
+    color: var(--extra-extra-light);
 }

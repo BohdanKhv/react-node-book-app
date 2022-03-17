@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom'
 import { getBooks } from "../actions/books"
 import { Book } from "../components"
+import './styles/genreView.css'
 
 const GenreView = () => {
 

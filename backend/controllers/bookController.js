@@ -12,10 +12,11 @@ const getBooks = async (req, res) => {
             const $ = cheerio.load(result.data)
             const items = []
         
-            $('.bookBox > .coverWrapper > a img').each((index, element) => {
+            $('.bookBox > .coverWrapper > a').each((index, element) => {
                 items.push({
-                    cover: $(element).attr('src'),
-                    title: $(element).attr('alt'),
+                    id: $(element).attr('href').replace('/book/show/', ''),
+                    cover: $(element).find('img').attr('src'),
+                    title: $(element).find('img').attr('alt'),
                 })
             })
     
@@ -29,7 +30,7 @@ const getBooks = async (req, res) => {
 
 const getGenres = async (req, res) => {
     try {
-        const result = await axios('https://www.goodreads.com/genres/list?filter=top-level')
+        const result = await axios.get('https://www.goodreads.com/genres/list?filter=top-level')
         const $ = cheerio.load(result.data)
         const genreList = []
     
@@ -39,16 +40,54 @@ const getGenres = async (req, res) => {
                 booksCount: $(el).find('.smallText').text().replace(/\s\s+/g, '').replace(' books', '')
             })
         })
-        // console.log(genreList)
-    
+
         res.status(200).json(genreList)
     } catch (err) {
         console.log('error', err)
     }
+}
 
+const getBook = async (req, res) => {
+    if(!req.params.id) {
+        res.status(400).json({error: 'Book id is required'})
+    }
+
+    try {
+        const result = await axios.get(`https://www.goodreads.com/book/show/${req.params.id}`)
+        const $ = cheerio.load(result.data)
+        const item = {
+            title: $('#bookTitle').text().replace(/\s\s+/g, '').replaceAll('\n', ''),
+            author: $('#bookAuthors .authorName span[itemprop="name"]').text(),
+            bookMeta: {
+                rating: $('#bookMeta span[itemprop="ratingValue"]').text().replace(/\s\s+/g, '').replaceAll('\n', ''),
+                ratingCount: $('#bookMeta meta[itemprop="ratingCount"]').attr('content')
+            },
+            cover: $('#coverImage').attr('src'),
+            details: {
+                bookFormat: $('#details span[itemprop="bookFormat"]').text(),
+                numberOfPages: $('#details span[itemprop="numberOfPages"]').text().replace(' pages', ''),
+                publishDate: $('#details > div.row').text().replace(/\s\s+/g, ' ').replaceAll('\n', ' ').split('pages').pop(),
+                language: $('#bookDataBox div[itemprop="inLanguage"]').text()
+            },
+            amazonLink: `https://www.amazon.com/s?k=${$('#bookTitle').text().replace(/\s\s+/g, '').replaceAll('\n', '').replaceAll(' ', '+')}&i=stripbooks`,
+            description: $('#description span:nth-of-type(2)').html(),
+            related: []
+        }
+        $('.bookCarousel a').each((i, el) => {
+            item['related'].push({
+                id: $(el).attr('href').split('show/').pop(),
+                cover: $(el).find('img').attr('src'),
+                title: $(el).find('img').attr('alt')
+            })
+        })
+        res.status(200).json(item)
+    } catch (err) {
+        console.log(err)
+    }
 }
 
 module.exports = {
     getBooks,
-    getGenres
+    getGenres,
+    getBook
 }

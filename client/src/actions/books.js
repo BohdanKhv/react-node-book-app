@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const apiUrl = 'api/books/'
+const apiUrl = '/api/books/'
 
 // Search for books by title
 const searchBooks = async (q) => {
@@ -21,7 +21,16 @@ const getGenres = async () => {
 
 const getBooks = async (genre, type) => {
     try {
-        const result = await axios.get(`/${apiUrl}newreleases?genre=${genre}&type=${type}`)
+        const result = await axios.get(`${apiUrl}newreleases?genre=${genre}&type=${type}`)
+        return result.data
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+const getBook = async (id) => {
+    try {
+        const result = await axios.get(`${apiUrl}book/${id}`)
         return result.data
     } catch (err) {
         console.log(err)
@@ -31,5 +40,6 @@ const getBooks = async (genre, type) => {
 export {
     searchBooks,
     getGenres,
-    getBooks
+    getBooks,
+    getBook
 }

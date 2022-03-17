@@ -5,6 +5,7 @@ import SearchForm from './content/SearchForm'
 import Card from './content/Card'
 import Genres from './content/Genres'
 import Book from './content/Book'
+import BookDetails from './content/BookDetails'
 
 export {
     Nav,
@@ -14,4 +15,5 @@ export {
     Card,
     Genres,
     Book,
+    BookDetails,
 }

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import './styles/book.css'
 
 const Book = ({ items, title, isLoading }) => {
@@ -7,9 +8,11 @@ const Book = ({ items, title, isLoading }) => {
                 <h2>{title}</h2>
                 {items && items.map((item, index) => {
                     return (
-                        <div className="book" key={`card-new-release-${index}`}>
+                        <div className="book" key={`book-${item.id}`}>
                             <h3>{ item?.title }</h3>
-                            <img src={ item?.cover } alt={ item?.title } className="img"/>
+                            <Link to={`/book/show/${item.id}`}>
+                                <img src={ item?.cover } alt={ item?.title } className="img"/>
+                            </Link>
                         </div>
                     )
                 })}
