@@ -19,6 +19,6 @@ if(process.env.NODE_ENV === 'production') {
     app.get('/', (req, res) => res.send('Please set to production'))
 }
 
-app.listen(5000, () => {
+app.listen(process.env.PORT || 5000, () => {
     console.log("Server is runnig")
 })
