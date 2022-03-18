@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { SearchForm } from "../components"
-import DisplayRow from "../components/content/DisplayRow"
+import { SearchForm, SearchCard } from "../components"
 
 const Search = () => {
 
@@ -10,7 +9,7 @@ const Search = () => {
     return (
         <div className="container">
             <SearchForm setFoundBooks={setFoundBooks} setIsLoading={setIsLoading} />
-            <DisplayRow foundBooks={foundBooks} isLoading={isLoading} />
+            <SearchCard foundBooks={foundBooks} isLoading={isLoading} />
         </div>
     )
 }

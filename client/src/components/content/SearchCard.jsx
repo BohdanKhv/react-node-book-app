@@ -1,7 +1,9 @@
 import './styles/book.css'
 import { Card } from '../'
 
-const DisplayRow = ({ isLoading, foundBooks }) => {
+// This components is temporary
+
+const SearchCard = ({ isLoading, foundBooks }) => {
     return (
         <section className="display-row">
             { isLoading ?
@@ -31,4 +33,4 @@ const DisplayRow = ({ isLoading, foundBooks }) => {
     )
 }
 
-export default DisplayRow
+export default SearchCard

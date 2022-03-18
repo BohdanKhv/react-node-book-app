@@ -1,5 +1,5 @@
 .book-details {
-    margin: 100px 0;
+    margin-top: 100px;
     display: grid;
     grid-template-columns: 300px 1fr;
     min-height: 700px;
@@ -38,6 +38,7 @@
 }
 
 .book-details .info .author {
+    margin: 10px 0;
     font-size: 1rem;
     font-weight: 400;
     font-style: italic;
@@ -48,7 +49,14 @@
     display: flex;
     margin: 10px 0;
     padding-left: 15px;
+    font-weight: 600;
+    align-items: center;
 }
+
+.book-details .info .meta span {
+    margin-left: 5px;
+}
+
 
 .book-details .info .more-details  p {
     padding-left: 15px;
@@ -56,14 +64,10 @@
     margin: 0 0;
 }
 
-.book-details .info .description {
-    margin-top: 20px;
-}
-
 .book-details .info .description h5 {
     font-size: 1.2rem;
     font-weight: 400;
-    margin: 5px 0;
+    margin: 20px 0;
 }
 
 .book-details .info .description p {
@@ -74,11 +78,6 @@
 .book-details .info .description b {
     font-weight: 600;
 }
-
-.book-details .info .meta span {
-    margin-left: 5px;
-}
-
 .book-details .cover.blink {
     height: 300px;
 }
@@ -138,7 +137,10 @@
         align-items: center;
     }
     
+    .book-details .info .author,
+    .book-details .info .description p,
     .book-details .info .meta {
         justify-content: center;
+        padding: 0;
     }
 }

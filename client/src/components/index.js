@@ -6,6 +6,8 @@ import Card from './content/Card'
 import Genres from './content/Genres'
 import Book from './content/Book'
 import BookDetails from './content/BookDetails'
+import SearchCard from './content/SearchCard'
+import CardsRow from './content/CardsRow'
 
 export {
     Nav,
@@ -16,4 +18,6 @@ export {
     Genres,
     Book,
     BookDetails,
+    SearchCard,
+    CardsRow,
 }
