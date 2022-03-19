@@ -1,5 +1,5 @@
 .genres-list  {
-    padding-bottom: 160px;
+    min-height: 800px;
 }
 
 .genres-list .container {
@@ -9,11 +9,21 @@
     justify-content: center;
 }
 
-.genres-list h2 {
+.genres-list .title {
     grid-column: 1/-1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.genres-list a {
+.genres-list .title input {
+    min-width: 50px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px 0 var(--pure-black);
+}
+
+.genres-list a,
+.genres-list .load-more {
     min-height: 80px;
     width: 100%;
     border-radius: 5px;
@@ -27,14 +37,17 @@
     background: var(--light);
     color: var(--black);
     transition: .3s;
+    cursor: pointer;
     box-shadow: 5px 5px 15px 0 var(--pure-black);
 }
 
-.genres-list a:hover {
+.genres-list a:hover,
+.genres-list .load-more:hover {
     opacity: 75%;
 }
 
-.genres-list a:active {
+.genres-list a:active,
+.genres-list .load-more:active {
     opacity: 50%;
 }
 

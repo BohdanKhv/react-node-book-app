@@ -6,18 +6,27 @@ const Genres = () => {
 
     const [genres, setGenres] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
+    const [showGenreCount, setShowGenreCount] = useState(10)
+    const [filter, setFilter] = useState('')
 
     useEffect(() => {
         setIsLoading(true)
         getGenres().then((res) => {setGenres(res); setIsLoading(false);})
     }, [])
 
+    const loadMore = () => {
+        setShowGenreCount(showGenreCount + 10)
+    }
+
     return (
         <section className="genres-list">
             <div className="container">
-                <h2>All Genres</h2>
+                <div className="title">
+                    <h2>Genres</h2>
+                    <input type="text" placeholder="Find genre" value={filter} onChange={(e) => setFilter(e.currentTarget.value)} />
+                </div>
                 {isLoading && 
-                    [...Array(25).keys()].map((i) => (
+                    [...Array(12).keys()].map((i) => (
                         <div className="link-card blink" style={{['--order']: `${i}`}} key={i}>
                             <a href='#'>
                             </a>
@@ -26,16 +35,35 @@ const Genres = () => {
                 }
                 {genres && genres.map((item, i) => {
                     return (
-                        <div className="link-card">
-                            <a href={`/genre/${item.name}`}>
-                                <h5>
-                                {item.name.slice(0,1).toUpperCase() + item.name.slice(1).replaceAll('-', ' ')}
-                                </h5>
-                                <h6>Books: {item.booksCount}</h6>
-                            </a>
-                        </div>
+                        showGenreCount >= i && filter === '' ?
+                            <div className="link-card" key={`genra-${i}`}>
+                                <a href={`/genre/${item.name}`}>
+                                    <h5>
+                                        {item.name.slice(0,1).toUpperCase() + item.name.slice(1).replaceAll('-', ' ')}
+                                    </h5>
+                                    <h6>Books: {item.booksCount}</h6>
+                                </a>
+                            </div>
+                        : filter !== '' &&item.name.includes(filter) &&
+                            <div className="link-card" key={`genra-${i}`}>
+                                <a href={`/genre/${item.name}`}>
+                                    <h5>
+                                        {item.name.slice(0,1).toUpperCase() + item.name.slice(1).replaceAll('-', ' ')}
+                                    </h5>
+                                    <h6>Books: {item.booksCount}</h6>
+                                </a>
+                            </div>
                     )
                 })}
+                {!isLoading && filter === '' && genres && showGenreCount < genres.length &&
+                    <div className="link-card" onClick={loadMore}>
+                        <div className="load-more">
+                            <h5>
+                                Show More
+                            </h5>
+                        </div>
+                    </div>
+                }
             </div>
         </section>
     )

@@ -26,6 +26,22 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+body::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+body::-webkit-scrollbar-track {
+    background: var(--primary);
+    width: 1px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: var(--black);
+    border-radius: 5px;
+    border: 1px solid var(--primary);
+}
+
 .container {
     padding: 0 50px;
     margin: 0 auto;
@@ -47,10 +63,22 @@ body {
     box-shadow: 5px 5px 15px 0 var(--pure-black);
 }
 
+input {
+    outline: none;
+    border: none;
+    opacity: 75%;
+    padding: 5px 10px;
+    transition: .3s;
+    font-size: 1rem;
+}
+
+input:hover,
 input:focus {
     outline: none;
     border: none;
+    opacity: 1;
 }
+
 
 .btn:hover {
     opacity: 75%;

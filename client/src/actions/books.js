@@ -4,9 +4,9 @@ const apiUrl = '/api/books/'
 
 // Search for books by title
 const searchBooks = async (q) => {
-    const result = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${q}$printType=books`)
-    // const result = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${q}&filter=free-ebooks`)
-    // console.log(result.data.items)
+    const result = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${q}&printType=books&maxResults=1`)
+    console.log(result.data.items[0])
+    console.log(result.data.items[0].volumeInfo.publishedDate)
     return result.data
 }
 

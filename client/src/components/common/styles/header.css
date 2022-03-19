@@ -66,12 +66,9 @@ header .actions button:nth-of-type(1) {
         height: 800px;
     }
 
-    header .actions {
-        flex-direction: column;
+    header .info {
+        max-width: 100%;
+        align-items: center;
     }
 
-    header .actions button:nth-of-type(1) {
-        margin-right: 0;
-        margin-bottom: 10px;
-    }
 }

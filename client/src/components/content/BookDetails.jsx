@@ -22,14 +22,28 @@ const BookDetails = ({item, isLoading}) => {
                         By {item?.author}
                     </h5>
                     <div className="meta">
-                        <img src="https://img.icons8.com/stickers/25/000000/star.png"/>
+                        {[...Array(5).keys()].map((i) => {
+                            return (
+                                <img key={`rating-star-${i}`} src={ i === Math.round(+item.bookMeta?.rating) ?
+                                    +item.bookMeta?.rating % 1 >= 0.5 ?
+                                        "https://img.icons8.com/color/20/000000/star-half.png"
+                                    :
+                                        "https://img.icons8.com/color/20/000000/star.png"
+                                : i < Math.round(+item.bookMeta?.rating) ?
+                                    "https://img.icons8.com/fluency/20/000000/star.png"
+                                :
+                                    "https://img.icons8.com/color/20/000000/star.png"
+                                }/>
+                            )
+                        })}
+                        {Math.round(+item.bookMeta?.rating)}
                         <span>{item.bookMeta?.rating} |</span>
-                        <span>{item.bookMeta?.ratingCount} ratings</span>
+                        <span>{item.bookMeta?.ratingCount.replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ratings</span>
                     </div>
                     <div className="more-details">
-                        {item.details?.bookFormat && item.details?.numberOfPages &&
+                        {(item.details?.bookFormat || item.details?.numberOfPages )&&
                             <p>
-                                {`${item.details?.bookFormat}, ${item.details?.numberOfPages} pages`}
+                                {`${item.details?.bookFormat} ${item.details?.numberOfPages} pages`}
                             </p>
                         }
                         <p>

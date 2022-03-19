@@ -6,7 +6,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 25px;
-    margin: 150px 0;
+    margin: 100px 0;
 }
 
 .books h2 {
@@ -60,4 +60,11 @@
 .books .book .img:hover,
 .books-row .book .img:hover {
     transform: scale(1.1);
+}
+
+.book.load-more {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }

@@ -1,6 +1,6 @@
 .search-form {
     width: 100%;
-    padding: 150px 0;
+    padding-top: 150px;
     display: flex;
     justify-content: center;
 }
@@ -14,14 +14,6 @@
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     padding: 0 15px;
-    font-size: 1rem;
-    opacity: 75%;
-    transition: 0.3s;
-}
-
-.search-form input:hover,
-.search-form input:focus {
-    opacity: 1;
 }
 
 .search-form button {

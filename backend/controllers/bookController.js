@@ -34,6 +34,7 @@ const getGenres = async (req, res) => {
         const $ = cheerio.load(result.data)
         const genreList = []
     
+        // Scrape all genres
         $('.shelfStat').each((i, el) => {
             genreList.push({
                 name: $(el).find('a').text().replace(/\s\s+/g, ''),
@@ -53,6 +54,7 @@ const getBook = async (req, res) => {
     }
 
     try {
+        // Scrape one book info
         const result = await axios.get(`https://www.goodreads.com/book/show/${req.params.id}`)
         const $ = cheerio.load(result.data)
         const item = {
@@ -73,6 +75,18 @@ const getBook = async (req, res) => {
             description: $('#description span:nth-of-type(2)').html(),
             related: []
         }
+
+        // Get book page count from google books api only if nothing was scraped
+        if(item.details.numberOfPages === '') {
+            const gSearch = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${req.params.id}&printType=books&maxResults=1`)
+            if (gSearch?.data?.items[0]?.volumeInfo.pageCount) {
+                item.details.bookFormat = "Book"
+                item.details.numberOfPages = gSearch?.data?.items[0]?.volumeInfo?.pageCount
+                item.details.publishDate = gSearch?.data?.items[0]?.volumeInfo?.publishedDate?.replaceAll('-', '/')
+            }
+        }
+
+        // Add ralated books to that item
         $('.bookCarousel a').each((i, el) => {
             item['related'].push({
                 id: $(el).attr('href').split('show/').pop(),
