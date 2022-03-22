@@ -73,7 +73,8 @@ const getBook = async (req, res) => {
             },
             amazonLink: `https://www.amazon.com/s?k=${$('#bookTitle').text().replace(/\s\s+/g, '').replaceAll('\n', '').replaceAll(' ', '+')}&i=stripbooks`,
             description: $('#description span:nth-of-type(2)').html(),
-            related: []
+            related: [],
+            genres: []
         }
 
         // Get book page count from google books api only if nothing was scraped
@@ -94,9 +95,19 @@ const getBook = async (req, res) => {
                 title: $(el).find('img').attr('alt')
             })
         })
+
+        // Add related genres
+        $('.bigBoxBody .elementList').each((i, el) => {
+            $(el).find('.actionLinkLite').each((i, elem) => {
+                item['genres'].push({
+                    name: $(elem).attr('href').split('genres/').pop()
+                })
+            })
+        }) 
         res.status(200).json(item)
     } catch (err) {
         console.log('error', err)
+        res.status(400).json({error: 'Book was not found'})
     }
 }
 
@@ -117,7 +128,7 @@ const search = async (req, res) => {
 
         $('.tableList tr').each((i, el) => {
             data.items.push({
-                id: $(el).find('.bookTitle').attr('href').match(/(?<=show\/)(.*)(?=\?)/gi)[0],
+                id: $(el).find('.ratingStars .stars').attr('data-resource-id'),
                 cover: $(el).find('img').attr('src').slice(0, -10) + '_SX475_' + $(el).find('img').attr('src').slice(-4),
                 title: $(el).find('span[itemprop="name"]').text(),
                 author: $(el).find('span[itemprop="author"]').text().replaceAll('\n', ''),
@@ -135,6 +146,7 @@ const search = async (req, res) => {
         res.status(200).json(data)
     } catch (err) {
         console.log('error', err)
+        res.status(400).json({error: 'Nothing was found'})
     }
 }
 
@@ -151,7 +163,7 @@ const getBookOfTheYear = async (req, res) => {
 
         $('.category').each((i, el) => {
             items.push({
-                id: $(el).find('.stars').attr('data-resource-id') + '-' +$(el).find('img').attr('alt').replace(/[^a-z0-9 -]/gi, '').replaceAll(' ', '-'),
+                id: $(el).find('.stars').attr('data-resource-id'),
                 cover: $(el).find('img').attr('src'),
                 title: $(el).find('img').attr('alt'),
                 category: $(el).find('.category__copy').text().replace(/\n\s\s+/g, '').replaceAll('\n', '')
@@ -161,6 +173,7 @@ const getBookOfTheYear = async (req, res) => {
         res.status(200).json(items)
 
     } catch (err) {
+        res.status(400).json({error: 'Somthing went wrong'})
         console.log('error', err)
     }
 } 

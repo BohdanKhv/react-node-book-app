@@ -16,7 +16,8 @@
     align-self: center;
 }
 
-.books .book .title-wrapper {
+.books .book .title-wrapper,
+.books-row .book .title-wrapper {
     width: 100%;
 }
 

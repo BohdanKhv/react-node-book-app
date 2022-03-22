@@ -2,8 +2,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { getBook } from '../actions/books'
-import BookDetails from '../components/content/BookDetails'
-import CardsRow from '../components/content/CardsRow'
+import { BookDetails, BooksRow, CardRow } from '../components'
 import './styles/showBook.css'
 
 
@@ -22,12 +21,13 @@ const ShowBook = () => {
     }, [params])
 
     return (
-        <div className="container">
+        <>
             <BookDetails item={item} isLoading={isLoading}/>
+                <BooksRow items={item?.related} title="Related Books" isLoading={isLoading} />
             {item && 
-                <CardsRow items={item?.related} title="Related" />
+                <CardRow title="Related Genres" items={item.genres} />
             }
-        </div>
+        </>
     )
 }
 

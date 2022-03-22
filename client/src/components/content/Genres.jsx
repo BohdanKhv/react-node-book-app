@@ -25,7 +25,13 @@ const Genres = () => {
             <div className="container">
                 <div className="title">
                     <h2>Genres</h2>
-                    <input type="text" placeholder="Find genre" value={filter} onChange={(e) => {setFilter(e.currentTarget.value)}} />
+                    <input 
+                        type="text"
+                        placeholder="Find genre" 
+                        value={filter} 
+                        onChange={(e) => {setFilter(e.currentTarget.value)}}
+                        onClick={(e) => {window.scrollTo(0, e.pageY - 50)}} 
+                    />
                 </div>
                 {isLoading && 
                     [...Array(12).keys()].map((i) => (

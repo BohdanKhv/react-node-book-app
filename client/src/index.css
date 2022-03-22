@@ -154,6 +154,12 @@ a {
     background-image: url('./components/img/wave1.svg');
 }
 
+.layer-footer {
+    transform: rotate(180deg);
+    background-image: url('./components/img/wave1.svg');
+    bottom: 100px;
+}
+
 .d-none {
     display: none!important;
 }

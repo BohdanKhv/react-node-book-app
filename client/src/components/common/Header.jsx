@@ -13,7 +13,7 @@ const Header = () => {
           <p>You’re in the right place. Tell us what titles or genres you’ve enjoyed in the past, and we’ll give you surprisingly insightful recommendations.</p>
           <div className="actions">
             <Link to='/search' className="btn btn-primary">Search</Link>
-            <Link to='/search' className="btn">Genres</Link>
+            <Link to='/bestbook/2021' className="btn">Best Of 2021</Link>
           </div>
         </div>
       </div>

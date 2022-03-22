@@ -1,5 +1,5 @@
 .best-book {
-    margin-top: 100px;
+    padding: 50px 0;
 }
 
 .best-book .years {
@@ -50,6 +50,7 @@
 
 .best-book .year h5 {
     z-index: 2;
+    text-align: center;
 }
 
 .best-book .years::-webkit-scrollbar {

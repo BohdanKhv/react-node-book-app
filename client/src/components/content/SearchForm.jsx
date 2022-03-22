@@ -4,7 +4,13 @@ const SearchForm = ({ query, setQuery, search }) => {
 
     return (
         <section className="search-form">
-            <input type="text" placeholder="Search" value={query.get('search')} onChange={(e) => setQuery({search: e.currentTarget.value, page: query.get('page')})} />
+            <input 
+                type="text" 
+                placeholder="Search" 
+                value={query.get('search')} 
+                onChange={(e) => setQuery({search: e.currentTarget.value, page: query.get('page')})}
+                onClick={(e) => {window.scrollTo(0, e.pageY - 50)}}
+            />
             <button className="btn btn-primary" onClick={()=> { search(); setQuery({search: query.get('search'), page: 1})} }>Search</button>
         </section>
     )

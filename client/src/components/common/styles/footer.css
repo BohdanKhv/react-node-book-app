@@ -2,3 +2,22 @@ footer {
     position: relative;
     margin-top: 185px;
 }
+
+footer .info {
+    height: 100px;
+    background: var(--primary);
+    z-index: 2;
+    position: relative;
+    padding: 25px;
+    text-align: center;
+    display: grid;
+    align-items: flex-end;
+}
+
+footer .info a {
+    transition: .3s;
+}
+
+footer .info a:hover {
+    color: var(--black);
+}

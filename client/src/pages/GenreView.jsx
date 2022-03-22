@@ -14,13 +14,14 @@ const GenreView = () => {
     const [mostReadisLoading, setMostReadisLoading] = useState(false)
 
     useEffect(() => {
+        window.scrollTo(0, 0)
         if(params.id) {
             setNewReleasesisLoading(true)
             setMostReadisLoading(true)
             getBooks(params.id, 'new_releases').then((res) => {setNewReleases(res); setNewReleasesisLoading(false)})
             getBooks(params.id, 'most_read').then((res) => {setMostRead(res); setMostReadisLoading(false)})
         }
-    }, [])
+    }, [params])
 
     return (
         <div className="genre-view">

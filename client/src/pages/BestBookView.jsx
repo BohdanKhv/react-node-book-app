@@ -10,6 +10,7 @@ const BestBookView = () => {
     const [isLoading, setIsLoading] = useState(null)
 
     useEffect(() => {
+        window.scrollTo(0, 0)
         setIsLoading(true)
         getBestOfTheYear(params.id).then((res) => {setItems(res); setIsLoading(false)})
     }, [params])

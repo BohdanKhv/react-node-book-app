@@ -37,7 +37,7 @@ const Book = ({ items, title, isLoading, isSearch }) => {
                                             </span>
                                             <span>
                                                 <img src="https://img.icons8.com/external-those-icons-lineal-color-those-icons/20/000000/external-rating-feedback-those-icons-lineal-color-those-icons-1.png" alt="star" />
-                                                {item.bookMeta?.ratingCount}
+                                                {item.bookMeta?.ratingCount.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                                             </span>
                                         </div>
                                         : item.category &&

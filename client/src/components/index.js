@@ -5,8 +5,9 @@ import SearchForm from './content/SearchForm'
 import Genres from './content/Genres'
 import Book from './content/Book'
 import BookDetails from './content/BookDetails'
-import CardsRow from './content/CardsRow'
-import BestBook from './content/BestBook'
+import BooksRow from './content/BooksRow'
+import CardRow from './content/CardRow'
+import BookDisplay from './content/BookDisplay'
 
 export {
     Nav,
@@ -16,6 +17,7 @@ export {
     Genres,
     Book,
     BookDetails,
-    CardsRow,
-    BestBook,
+    BooksRow,
+    CardRow,
+    BookDisplay,
 }
