@@ -1,0 +1,75 @@
+.best-book {
+    margin-top: 100px;
+}
+
+.best-book .years {
+    display: flex;
+    overflow-x: scroll;
+    padding: 20px 0;
+    overscroll-behavior: contain;
+}
+
+.best-book .year {
+    min-width: 200px;
+    background-color: var(--light);
+    color: var(--black);
+    font-size: 1.5rem;
+    margin-right: 30px;
+    height: 140px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 5px 15px 0 var(--pure-black);
+    position: relative;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.best-book .year:hover {
+    opacity: 75%;
+}
+
+.best-book .year:active {
+    opacity: 50%;
+}
+
+.best-book .year .img {
+    background-image: url('../../img/boty.png');
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    right: 0;
+    bottom: 10px;
+    z-index: 1;
+    opacity: 55%;
+}
+
+.best-book .year h5 {
+    z-index: 2;
+}
+
+.best-book .years::-webkit-scrollbar {
+    width: 1px;
+}
+
+.best-book .years::-webkit-scrollbar-track {
+    background: var(--dark);
+    width: 1px;
+    border-radius: 10px;
+}
+
+.best-book .years::-webkit-scrollbar-thumb {
+    background-color: var(--black);
+    border-radius: 10px;
+    border: 2px solid var(--dark);
+}
+
+@media (max-width: 576px) {
+    .best-book .years {
+        overscroll-behavior: unset;
+    }
+}

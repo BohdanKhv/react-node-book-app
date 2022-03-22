@@ -1,5 +1,5 @@
 .genres-list  {
-    min-height: 800px;
+    min-height: 425px;
 }
 
 .genres-list .container {
@@ -7,6 +7,10 @@
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 30px;
     justify-content: center;
+}
+
+.genres-list .link-card {
+    box-shadow: 5px 5px 15px 0 var(--pure-black);
 }
 
 .genres-list .title {
@@ -38,7 +42,6 @@
     color: var(--black);
     transition: .3s;
     cursor: pointer;
-    box-shadow: 5px 5px 15px 0 var(--pure-black);
 }
 
 .genres-list a:hover,

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import './styles/header.css'
 
 const Header = () => {
@@ -8,11 +9,11 @@ const Header = () => {
       {/* <div className="concord-img-gradient"></div> */}
       <div className="container">
         <div className="info">
-          <h1>Book title</h1>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi nulla quo eius accusamus eligendi iste dolorum. Incidunt architecto nostrum aperiam dicta adipisci tempore doloribus ducimus, distinctio dolor est quaerat ullam.</p>
+          <h1>Deciding what to read next?</h1>
+          <p>You’re in the right place. Tell us what titles or genres you’ve enjoyed in the past, and we’ll give you surprisingly insightful recommendations.</p>
           <div className="actions">
-            <button className="btn btn-primary">Read</button>
-            <button className="btn">Add To List</button>
+            <Link to='/search' className="btn btn-primary">Search</Link>
+            <Link to='/search' className="btn">Genres</Link>
           </div>
         </div>
       </div>

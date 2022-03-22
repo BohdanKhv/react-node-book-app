@@ -24,7 +24,9 @@ const CardsRow = ({ items, title }) => {
                 {items && items.map((item, index) => {
                     return (
                         <div className="book" key={`book-${title}-${item.id}`}>
-                            <h3>{ item?.title }</h3>
+                            <div className="title">
+                                <h3>{ item?.title }</h3>
+                            </div>
                             <Link to={`/book/show/${item.id}`}>
                                 <img src={ item?.cover } alt={ item?.title } className="img"/>
                             </Link>

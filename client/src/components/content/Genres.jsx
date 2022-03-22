@@ -18,12 +18,14 @@ const Genres = () => {
         setShowGenreCount(showGenreCount + 10)
     }
 
+    const genreOrder = ['fiction', '40k', 'space', 'novella', 'futurism', 'futuristic', 'artificial-intelligence'];
+
     return (
         <section className="genres-list">
             <div className="container">
                 <div className="title">
                     <h2>Genres</h2>
-                    <input type="text" placeholder="Find genre" value={filter} onChange={(e) => setFilter(e.currentTarget.value)} />
+                    <input type="text" placeholder="Find genre" value={filter} onChange={(e) => {setFilter(e.currentTarget.value)}} />
                 </div>
                 {isLoading && 
                     [...Array(12).keys()].map((i) => (
@@ -33,7 +35,7 @@ const Genres = () => {
                         </div>
                     ))
                 }
-                {genres && genres.map((item, i) => {
+                {genres && genres.sort(a => genreOrder.includes(a.name.toLowerCase(), 0) ? -1 : 1).map((item, i) => {
                     return (
                         showGenreCount >= i && filter === '' ?
                             <div className="link-card" key={`genra-${i}`}>
@@ -44,7 +46,7 @@ const Genres = () => {
                                     <h6>Books: {item.booksCount}</h6>
                                 </a>
                             </div>
-                        : filter !== '' &&item.name.includes(filter) &&
+                        : filter !== '' && item.name.toLowerCase().includes(filter.toLowerCase()) &&
                             <div className="link-card" key={`genra-${i}`}>
                                 <a href={`/genre/${item.name}`}>
                                     <h5>

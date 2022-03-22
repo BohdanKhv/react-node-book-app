@@ -13,18 +13,15 @@
     overscroll-behavior: contain;
 }
 
-
 .books-row::-webkit-scrollbar {
     width: 1px;
 }
-
 
 .books-row::-webkit-scrollbar-track {
     background: var(--dark);
     width: 1px;
     border-radius: 10px;
 }
-
 
 .books-row::-webkit-scrollbar-thumb {
     background-color: var(--black);

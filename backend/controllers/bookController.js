@@ -96,12 +96,79 @@ const getBook = async (req, res) => {
         })
         res.status(200).json(item)
     } catch (err) {
-        console.log(err)
+        console.log('error', err)
     }
 }
+
+const search = async (req, res) => {
+    if(!req.query.q) {
+        res.status(400).json({error: 'Search query is required. (q=query)'})
+    }
+
+    try {
+        const result = await axios.get(`https://www.goodreads.com/search?query=${req.query.q}&page=${req.query.page ? req.query.page : 1}`)
+        const $ = cheerio.default.load(result.data)
+        // document.querySelector('.previous_page ').parent().children[document.querySelector('.previous_page ').parent().children.length-2]
+        
+        const data = {
+            items: [],
+            pages: $( $('.previous_page').parent().children()[ $('.previous_page').parent().children().length - 2 ] ).text()
+        }
+
+        $('.tableList tr').each((i, el) => {
+            data.items.push({
+                id: $(el).find('.bookTitle').attr('href').match(/(?<=show\/)(.*)(?=\?)/gi)[0],
+                cover: $(el).find('img').attr('src').slice(0, -10) + '_SX475_' + $(el).find('img').attr('src').slice(-4),
+                title: $(el).find('span[itemprop="name"]').text(),
+                author: $(el).find('span[itemprop="author"]').text().replaceAll('\n', ''),
+                bookMeta: {
+                    rating: $(el).find('.minirating').text().replace(' ', '').match(/(.*)(?= avg)/gi)[0].replace(/[^\d.]/g, ''),
+                    ratingCount: $(el).find('.minirating').text().split('— ').pop().split(' ratings')[0].replace(/[^\d.]/g, '')
+                },
+                details: {
+                    publishDate: $(el).find('.minirating').parent().text().includes('published') ? 
+                                    $(el).find('.minirating').parent().text().replace(/\n\s\s+/g, '').split('published').pop().slice(0,4)
+                                : '',
+                }
+            })
+        })
+        res.status(200).json(data)
+    } catch (err) {
+        console.log('error', err)
+    }
+}
+
+const getBookOfTheYear = async (req, res) => {
+
+    if(!req.params.year) {
+        res.status(400).json({error: 'Year is required'})
+    }
+
+    try {
+        const result = await axios.get(`https://www.goodreads.com/choiceawards/best-books-${req.params.year}`)
+        const $ = cheerio.load(result.data)
+        const items = []
+
+        $('.category').each((i, el) => {
+            items.push({
+                id: $(el).find('.stars').attr('data-resource-id') + '-' +$(el).find('img').attr('alt').replace(/[^a-z0-9 -]/gi, '').replaceAll(' ', '-'),
+                cover: $(el).find('img').attr('src'),
+                title: $(el).find('img').attr('alt'),
+                category: $(el).find('.category__copy').text().replace(/\n\s\s+/g, '').replaceAll('\n', '')
+            })
+        })
+
+        res.status(200).json(items)
+
+    } catch (err) {
+        console.log('error', err)
+    }
+} 
 
 module.exports = {
     getBooks,
     getGenres,
-    getBook
+    getBook,
+    search,
+    getBookOfTheYear
 }

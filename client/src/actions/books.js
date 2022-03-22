@@ -3,13 +3,12 @@ import axios from 'axios'
 const apiUrl = '/api/books/'
 
 // Search for books by title
-const searchBooks = async (q) => {
-    const result = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${q}&printType=books&maxResults=1`)
-    console.log(result.data.items[0])
-    console.log(result.data.items[0].volumeInfo.publishedDate)
+const searchBooks = async (q, page) => {
+    const result = await axios.get(`${apiUrl}search?q=${q}&page=${page}`)
     return result.data
 }
 
+// Get all genres
 const getGenres = async () => {
     try {
         const result = await axios.get(`${apiUrl}genres/list`)
@@ -19,6 +18,7 @@ const getGenres = async () => {
     }
 }
 
+// Get top books
 const getBooks = async (genre, type) => {
     try {
         const result = await axios.get(`${apiUrl}newreleases?genre=${genre}&type=${type}`)
@@ -28,9 +28,19 @@ const getBooks = async (genre, type) => {
     }
 }
 
+// Get one book
 const getBook = async (id) => {
     try {
         const result = await axios.get(`${apiUrl}book/${id}`)
+        return result.data
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+const getBestOfTheYear = async (id) => {
+    try {
+        const result = await axios.get(`${apiUrl}bestbook/${id}`)
         return result.data
     } catch (err) {
         console.log(err)
@@ -41,5 +51,6 @@ export {
     searchBooks,
     getGenres,
     getBooks,
-    getBook
+    getBook,
+    getBestOfTheYear
 }

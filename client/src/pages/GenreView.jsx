@@ -26,6 +26,7 @@ const GenreView = () => {
         <div className="genre-view">
             <div className="container">
                 <h1 className="genre-title">{params.id && params.id.replaceAll('-', ' ').toUpperCase()}</h1>
+                <hr />
                 <Book items={newReleases} title={'New Releases'} isLoading={newReleasesisLoading}/>
                 <Book items={mostRead} title={'Most Read This Week'} isLoading={mostReadisLoading}/>
             </div>

@@ -6,7 +6,7 @@ const BookDetails = ({item, isLoading}) => {
             {item && !isLoading ?
             <>
                 <div className="cover">
-                    <img className="cover-img" src={item?.cover} alt={item?.title} />
+                    <img className="cover-img" src={item.cover ? item.cover : "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/nophoto/book/111x148._SX475_.png"} alt={item?.title} />
                     <div className="buy">
                         <a target="_blank" href={item?.amazonLink} className="btn btn-primary">
                             <img src="https://img.icons8.com/color/25/000000/amazon.png"/>
@@ -24,26 +24,24 @@ const BookDetails = ({item, isLoading}) => {
                     <div className="meta">
                         {[...Array(5).keys()].map((i) => {
                             return (
-                                <img key={`rating-star-${i}`} src={ i === Math.round(+item.bookMeta?.rating) ?
+                                <img key={`rating-star-${i}`} src={
+                                i+1 === Math.round(+item.bookMeta?.rating) ?
                                     +item.bookMeta?.rating % 1 >= 0.5 ?
                                         "https://img.icons8.com/color/20/000000/star-half.png"
                                     :
-                                        "https://img.icons8.com/color/20/000000/star.png"
-                                : i < Math.round(+item.bookMeta?.rating) ?
+                                        "https://img.icons8.com/fluency/20/000000/star.png"
+                                : i < Math.round(+item.bookMeta?.rating) &&
                                     "https://img.icons8.com/fluency/20/000000/star.png"
-                                :
-                                    "https://img.icons8.com/color/20/000000/star.png"
                                 }/>
                             )
                         })}
-                        {Math.round(+item.bookMeta?.rating)}
                         <span>{item.bookMeta?.rating} |</span>
                         <span>{item.bookMeta?.ratingCount.replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ratings</span>
                     </div>
                     <div className="more-details">
                         {(item.details?.bookFormat || item.details?.numberOfPages )&&
                             <p>
-                                {`${item.details?.bookFormat} ${item.details?.numberOfPages} pages`}
+                                {item.details?.bookFormat} <b>{`${item.details?.numberOfPages} pages`}</b>
                             </p>
                         }
                         <p>

@@ -5,3 +5,10 @@
 .genre-view h1 {
     text-align: center;
 }
+
+.genre-view hr {
+    border: 2px solid var(--primary);
+    border-radius: 5px;
+    width: 100px;
+    margin: 0 auto;
+}

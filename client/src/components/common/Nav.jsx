@@ -7,7 +7,7 @@ const Nav = () => {
             <div className="container">
                 <Link to={'/'} className="logo">
                     <img src="https://img.icons8.com/external-itim2101-lineal-color-itim2101/50/000000/external-book-back-to-school-itim2101-lineal-color-itim2101.png" alt="Logo" />
-                    <h1>Scrab</h1>
+                    <h1>Scott</h1>
                 </Link>
                 <ul className="navigation">
                     <li>

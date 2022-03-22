@@ -1,26 +1,11 @@
-import { useState } from 'react'
 import './styles/searchForm.css'
-import { searchBooks } from '../../actions/books'
 
-const SearchForm = ({ setFoundBooks, setIsLoading }) => {
-
-    const [query, setQuery] = useState('')
-
-    const search = () => {
-        if(query !== '') {
-            setIsLoading(true)
-            searchBooks(query).then( 
-                (res) => {
-                    setFoundBooks(res); 
-                    setIsLoading(false); 
-            } )
-        }
-    }
+const SearchForm = ({ query, setQuery, search }) => {
 
     return (
         <section className="search-form">
-            <input type="text" placeholder="Search" value={query} onChange={(e) => setQuery(e.currentTarget.value)} />
-            <button className="btn btn-primary" onClick={search}>Search</button>
+            <input type="text" placeholder="Search" value={query.get('search')} onChange={(e) => setQuery({search: e.currentTarget.value, page: query.get('page')})} />
+            <button className="btn btn-primary" onClick={()=> { search(); setQuery({search: query.get('search'), page: 1})} }>Search</button>
         </section>
     )
 }

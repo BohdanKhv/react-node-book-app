@@ -19,7 +19,7 @@ nav .logo {
     justify-content: center;
     align-items: center;
     font-size: 1.5rem;
-    color: var(--extra-extra-light);
+    color: var(--extra-light);
     transition: .3s;
 }
 
@@ -40,12 +40,12 @@ nav ul li {
 nav svg {
     width: 25px;
     margin-right: 10px;
-    fill: var(--extra-extra-light);
+    fill: var(--extra-light);
     transition: .3s;
 }
 
 nav li a:hover svg {
-    fill: var(--extra-extra-light);
+    fill: var(--extra-light);
 }
 
 nav ul li a:hover {
@@ -60,8 +60,8 @@ nav li a {
     align-items: center;
     border-radius: 5px;
     padding: 5px 10px;
-    border: 2px solid var(--extra-extra-light);
+    border: 2px solid var(--extra-light);
     transition: .3s;
     font-weight: 600;
-    color: var(--extra-extra-light);
+    color: var(--extra-light);
 }

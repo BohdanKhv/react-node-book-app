@@ -7,7 +7,11 @@ header {
 }
 
 header .img {
-    /* background-color: var(--main-action); */
+    background: url("../../img/main-bg.png");
+    opacity: 25%;
+    background-repeat: no-repeat;
+    background-position: 65vw 15vh;
+    background-size: 30vh;
     width: 100%;
     height: 100%;
     position: absolute;
@@ -21,7 +25,7 @@ header .container {
 header .info {
     position: relative;
     height: inherit;
-    max-width: 600px;
+    max-width: 700px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -30,6 +34,7 @@ header .info {
 
 header .info h1 {
     font-size: 3rem;
+    line-height: 2.75rem;
     padding: 15px 0;
 }
 
@@ -44,7 +49,7 @@ header .actions {
     display: flex;
 }
 
-header .actions button:nth-of-type(1) {
+header .actions a:nth-of-type(1) {
     margin-right: 10px;
 }
 
