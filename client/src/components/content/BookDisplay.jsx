@@ -1,42 +1,78 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { getBook } from '../../actions/books'
 import './styles/bookDisplay.css'
 
-const BookDisplay = () => {
+const BookDisplay = ({ item, randomGenre }) => {
+
+    const [ book, setBook ] = useState(null)
+    const [ isLoading, setIsLoading ] = useState(null)
+
+    useEffect(() => {
+        if(item) {
+            setIsLoading(true)
+            getBook(item.id).then((res) => {
+                setBook(res)
+                setIsLoading(false)
+                console.log(res)
+            })
+        }
+    }, [item])
+
     return (
         <section className="book-display">
             <div className="container">
+                {!isLoading && book ?
                 <div className="book-display-wrapper">
-                    <Link className="cover" to={`/book/show/2342342`}>
+                    <Link className="cover" to={`/book/show/${book.id}`}>
                             <div className="book-meta">
                                 <span>
                                     <img src="https://img.icons8.com/fluency/20/000000/star.png" alt="star" />
-                                    {/* {item.bookMeta?.rating} */}4.2
+                                    {book.bookMeta?.rating}
                                 </span>
                                 <span>
                                     <img src="https://img.icons8.com/external-those-icons-lineal-color-those-icons/20/000000/external-rating-feedback-those-icons-lineal-color-those-icons-1.png" alt="star" />
-                                    {/* {item.bookMeta?.ratingCount.replace(/\B(?=(\d{3})+(?!\d))/g, ",")} */}465
+                                    {book.bookMeta?.ratingCount.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                                 </span>
                             </div>
-                        <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1628192520l/58107989.jpg" alt="" className="img"/>
+                        <img src={book.cover} alt={book.title} className="img"/>
                     </Link>
                     <div className="info">
                         <div className="details">
                             <div className="title">
-                                <h2>Most Read Book In Science Fiction This Week</h2>
+                                <h2>Most Read Book In {randomGenre.replaceAll('-', ' ')} This Week</h2>
                             </div>
+                            <h3>{book.title}</h3>
                             <div className="description">
-                                <h3>Pixels of You</h3>
-                                <p>By Ananth HirshYuko OtaJ.R. Doyle</p>
-                                <p>Paperback 172 pages</p>
-                                <p>Published February 8th 2022 by Harry N. Abrams</p>
+                                <p>{`By ${book.author}`}</p>
+                                {book.details.numberOfPages &&
+                                <>
+                                    <p>{book.details.bookFormat} {book.details.numberOfPages} pages</p>
+                                    <p>{book.details.publishDate}</p>
+                                </>
+                                }
+                                <p>
+                                    [ {book.genres.map((item, i) => {
+                                            return (
+                                                    i <= 2 ?
+                                                        `${item.name}${i < 2 ? ', ' : '' }`
+                                                    : ''
+                                                )
+                                        })
+                                    } ]
+                                </p>
+                                <div className="description" dangerouslySetInnerHTML={{__html: `<p>${book?.description}</p>`}} />
                             </div>
                         </div>
                         <div className="actions">
-                            <Link to='/search' className="btn btn-primary">More Details</Link>
-                            <Link to='/genre/science-fiction' className="btn">Science Fiction</Link>
+                            <a target="_blank" href={book.amazonLink} className="btn btn-primary">Buy</a>
+                            <Link to={`/book/show/${book.id}`} className="btn">More Details</Link>
                         </div>
                     </div>
                 </div>
+                :
+                <div className="book-display-wrapper blink"></div>
+                }
             </div>
         </section>
     )

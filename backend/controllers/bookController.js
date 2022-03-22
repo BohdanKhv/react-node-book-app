@@ -58,6 +58,7 @@ const getBook = async (req, res) => {
         const result = await axios.get(`https://www.goodreads.com/book/show/${req.params.id}`)
         const $ = cheerio.load(result.data)
         const item = {
+            id: req.params.id,
             title: $('#bookTitle').text().replace(/\s\s+/g, '').replaceAll('\n', ''),
             author: $('#bookAuthors .authorName span[itemprop="name"]').text(),
             bookMeta: {

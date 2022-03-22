@@ -9,6 +9,10 @@
     overscroll-behavior: contain;
 }
 
+.cards-row-wrapper h2 {
+    text-transform: capitalize;
+}
+
 .best-book .year {
     min-width: 200px;
     background-color: var(--light);
