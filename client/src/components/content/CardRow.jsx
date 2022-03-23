@@ -14,6 +14,8 @@ const BestBook = ({ title, items }) => {
     }
 
     return (
+        <>
+        {items && items.length != 0 && 
         <section className="best-book">
             <div className="container">
                 <h2>{title}</h2>
@@ -22,10 +24,10 @@ const BestBook = ({ title, items }) => {
                     onWheel={onWheel} 
                     ref={booksRowRef}
                 >
-                    {items[0].name ? items.map(i => {
+                    {items[0].name ? items.map((i, b) => {
                         return (
                             <Link 
-                            key={`${i.name}-card-row`} 
+                            key={`${i.name+b}-card-row`} 
                             className="year"
                             to={`/genre/${i.name}`}
                             >
@@ -54,6 +56,8 @@ const BestBook = ({ title, items }) => {
                 </div>
             </div>
         </section>
+    }
+    </>
     )
 }
 

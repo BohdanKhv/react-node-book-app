@@ -17,42 +17,50 @@ const CardsRow = ({ items, title, isLoading }) => {
     return (
         <section className="cards-row-wrapper">
             <div className="container">
-                <h2>{title}</h2>
-                <div 
-                    className="books-row" 
-                    onWheel={onWheel} 
-                    ref={booksRowRef}>
-                    {!isLoading ? 
-                        items && items.map((item, index) => {
-                            return (
-                                <div className="book" key={`book-${title}-${item.id}`}>
-                                    <div className="title-wrapper">
-                                        <div className="title">
-                                            <h3>{ item?.title }</h3>
+                {!isLoading ? 
+                    items && items.length != 0 &&
+                    <>
+                        <h2>{title}</h2>
+                        <div 
+                            className="books-row" 
+                            onWheel={onWheel} 
+                            ref={booksRowRef}>
+                            {items.map((item, index) => {
+                                return (
+                                                <div className="book" key={`book-${title}-${item.id}`}>
+                                                    <div className="title-wrapper">
+                                                        <div className="title">
+                                                            <h3>{ item?.title }</h3>
+                                                        </div>
+                                                    </div>
+                                                    <Link to={`/book/show/${item.id}`}>
+                                                        <img src={ item?.cover } alt={ item?.title } className="img"/>
+                                                    </Link>
+                                                </div>
+                                )
+                            })}
+                        </div>
+                    </>
+                    : 
+                    <>
+                        <div className="books-row">
+                            {[...Array(10).keys()].map((i) => {
+                                return (
+                                        <div className="book blink" style={{['--order']: `${i}`}} key={`card-loading-${i}`}>
+                                            <div className="title-wrapper">
+                                                <div className="title">
+                                                    <h3></h3>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div className="img"></div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <Link to={`/book/show/${item.id}`}>
-                                        <img src={ item?.cover } alt={ item?.title } className="img"/>
-                                    </Link>
-                                </div>
-                            )
-                        })
-                    : [...Array(10).keys()].map((i) => {
-                            return (
-                                <div className="book blink" style={{['--order']: `${i}`}} key={`card-loading-${i}`}>
-                                    <div className="title-wrapper">
-                                        <div className="title">
-                                            <h3></h3>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div className="img"></div>
-                                    </div>
-                                </div>
-                            )
-                        })
+                                )
+                            })}
+                        </div>
+                    </>
                     }
-                </div>
             </div>
         </section>
     )

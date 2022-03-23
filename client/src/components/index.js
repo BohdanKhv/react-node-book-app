@@ -8,6 +8,7 @@ import BookDetails from './content/BookDetails'
 import BooksRow from './content/BooksRow'
 import CardRow from './content/CardRow'
 import BookDisplay from './content/BookDisplay'
+import RangeSlider from './minor/RangeSlider'
 
 export {
     Nav,
@@ -20,4 +21,5 @@ export {
     BooksRow,
     CardRow,
     BookDisplay,
+    RangeSlider,
 }
