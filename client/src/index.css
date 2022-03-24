@@ -32,13 +32,13 @@ body::-webkit-scrollbar {
 
 
 body::-webkit-scrollbar-track {
-    background: var(--primary);
+    /* background: var(--primary); */
     width: 1px;
 }
 
 body::-webkit-scrollbar-thumb {
     background-color: var(--black);
-    border-radius: 5px;
+    /* border-radius: 5px; */
     border: 1px solid var(--primary);
 }
 

@@ -14,7 +14,6 @@ const BookDisplay = ({ item, randomGenre }) => {
             getBook(item.id).then((res) => {
                 setBook(res)
                 setIsLoading(false)
-                console.log(res)
             })
         }
     }, [item])

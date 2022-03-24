@@ -48,6 +48,7 @@
 .advanced-search .btn {
     margin: 25px 0;
     width: 100%;
+    box-shadow: 5px 5px 15px 0 var(--dark);
 }
 
 .advanced-search-wrapper {
@@ -59,23 +60,61 @@
     padding: 25px 0;
 }
 
-.advanced-search-wrapper .label h5 {
-    font-weight: 400;
+.range-slider .name img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.range-slider .name {
+    display: flex;
+    align-items: center;
+}
+
+.range-slider .label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 10px;
-    font-size: 1rem;
+}
+
+.range-slider .display-toggle button {
+    padding: 2px 10px;
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.range-slider .display-toggle img {
+    width: 30px;
+    height: 30px;
+}
+
+.advanced-search-wrapper h5 {
+    font-weight: 400;
+    font-size: 1.2rem;
 }
 
 .advanced-search-wrapper hr {
     border: 1px solid var(--extra-light);
 }
 
-.advanced-search-wrapper .label .values {
+.advanced-search-wrapper .values {
     display: flex;
     justify-content: space-between;
     margin-bottom: 15px;
+    animation-name: fadeIn;
+    animation-duration: .5s;
+    animation-fill-mode: forwards;
 }
 
-.advanced-search-wrapper .label p {
+.rc-slider {
+    animation-name: fadeIn;
+    animation-duration: .5s;
+    animation-fill-mode: forwards;
+}
+
+.advanced-search-wrapper p {
     background: var(--extra-light);
     padding: 5px 10px;
     border-radius: 5px;

@@ -4,7 +4,15 @@ import './styles/searchForm.css'
 
 const SearchForm = ({ query, setQuery, search }) => {
 
-    const [ displayAdvanced, setDisplayAnvanced ] = useState(true)
+    const [ displayAdvanced, setDisplayAnvanced ] = useState(false)
+
+    const submitSearch = () => {
+        search(); 
+        setQuery({
+            search: query.get('search'), 
+            page: 1
+        });
+    }
 
     return (
         <section>
@@ -28,9 +36,17 @@ const SearchForm = ({ query, setQuery, search }) => {
                     style={{
                             borderTopRightRadius: displayAdvanced && '5px'
                     }}
+                    onKeyDown={ (e) => { 
+                        if( !displayAdvanced && e.key === "Enter" ) submitSearch()
+                    }}
                 />
                 {!displayAdvanced &&
-                    <button className="btn btn-primary" onClick={()=> { search(); setQuery({search: query.get('search'), page: 1})} }>Search</button>
+                    <button 
+                        className="btn btn-primary" 
+                        onClick={ () => submitSearch() }
+                    >
+                        Search
+                    </button>
                 }
             </div>
             {displayAdvanced &&
@@ -41,6 +57,7 @@ const SearchForm = ({ query, setQuery, search }) => {
                             min={40}
                             max={2000}
                             step={5}
+                            icon={"https://img.icons8.com/color/30/000000/single-page-mode.png"}
                         />
                         <hr />
                         <RangeSlider
@@ -48,13 +65,15 @@ const SearchForm = ({ query, setQuery, search }) => {
                             min={1}
                             max={5}
                             step={0.1}
+                            icon={"https://img.icons8.com/fluency/30/000000/star.png"}
                         />
                         <hr />
                         <RangeSlider
                             label="Rating Count"
-                            min={100}
-                            max={2000000}
-                            step={50}
+                            min={2}
+                            max={250000}
+                            step={10}
+                            icon={"https://img.icons8.com/external-those-icons-lineal-color-those-icons/30/000000/external-rating-feedback-those-icons-lineal-color-those-icons-1.png"}
                         />
                         <hr />
                         <RangeSlider
@@ -62,6 +81,7 @@ const SearchForm = ({ query, setQuery, search }) => {
                             min={1950}
                             max={2022}
                             step={1}
+                            icon={"https://img.icons8.com/color/30/000000/tear-off-calendar--v1.png"}
                         />
                         <hr />
                         <button className="btn btn-primary" onClick={()=> { console.log('search') }}>Search</button>
