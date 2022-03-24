@@ -1,16 +1,46 @@
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const RangeSlider = ({ label, step, min, max, icon }) => {
-
-    const [ value, setValue ] = useState(
-        [
-            Math.round(min + ((max - min) * 0.25)), 
-            Math.round(max - ((max - min) * 0.25))
-        ])
+const RangeSlider = ({ label, step, min, max, icon, name, advancedQuery, setAdvancedQuery, query }) => {
 
     const [display, setDisplay] = useState(false)
+
+    useEffect(() => {
+        if(query.get('min'+name) || query.get('max'+name)) {
+            setDisplay(true)
+            setAdvancedQuery(prevState => {
+                return {
+                    ...prevState,
+                    ['min'+name]: +query.get('min'+name) || Math.round(min + ((max - min) * 0.25)),
+                    ['max'+name]: +query.get('max'+name) || Math.round(max - ((max - min) * 0.25))
+                }
+                })
+        }
+    }, [query])
+
+    useEffect(() => {
+
+        if(display) {
+            setAdvancedQuery(prevState => {
+                return {
+                    ...prevState,
+                    ['min'+name]: +query.get('min'+name) || Math.round(min + ((max - min) * 0.25)),
+                    ['max'+name]: +query.get('max'+name) || Math.round(max - ((max - min) * 0.25))
+                }
+            })
+        }
+
+        if(!display) {
+            setAdvancedQuery(prevState => {
+                const state = { ...prevState };
+                delete state['min'+name]
+                delete state['max'+name]
+                return state;
+            })
+        }
+
+    }, [display])
 
     return (
         <div className="range-slider">
@@ -32,14 +62,14 @@ const RangeSlider = ({ label, step, min, max, icon }) => {
                         }
                     </div>
                 </div>
-                {display &&
+                {display && advancedQuery['min'+name] &&
                     <div className="values">
-                        <p>{min === 1 ? value[0].toFixed(1) : value[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
-                        <p>{min === 1 ? value[1].toFixed(1) : value[1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
+                        <p>{min === 1 ? advancedQuery['min'+name].toFixed(1) : advancedQuery['min'+name].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
+                        <p>{min === 1 ? advancedQuery['max'+name].toFixed(1) : advancedQuery['max'+name].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
                     </div>
                 }
             </div>
-            {display &&
+            {display && advancedQuery['min'+name] &&
                 <Slider 
                     range 
                     allowCross={false}
@@ -47,8 +77,14 @@ const RangeSlider = ({ label, step, min, max, icon }) => {
                     // defaultValue={[Math.round(min + (max/100) * 10), Math.round(max - (max/100) * 10)]} 
                     min={min}
                     max={max}
-                    value={value} 
-                    onChange={ (value) => setValue(value) }
+                    value={[advancedQuery['min'+name], advancedQuery['max'+name]]} 
+                    onChange={ (value) => {
+                        setAdvancedQuery({
+                            ...advancedQuery,
+                            ['min'+name]: value[0],
+                            ['max'+name]: value[1],
+                        })
+                    }}
                     pushable={ Math.round(((max+1 - min)/100 * 10)) }
                     trackStyle={{ 
                         height: 10, 

@@ -1,7 +1,7 @@
 import { useSearchParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { SearchForm, Book } from "../components"
-import { searchBooks } from '../actions/books'
+import { searchBooks, getAdvancedSearch } from '../actions/books'
 import Pagination from 'rc-pagination'
 import './styles/pagination.css'
 
@@ -10,7 +10,8 @@ const Search = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [items, setItems] = useState(null)
     const [pages, setPages] = useState(null)
-    const [query, setQuery] = useSearchParams({search: '', page: 1})
+    const [query, setQuery] = useSearchParams({search: ''})
+    const [advancedQuery, setAdvancedQuery] = useState({})
 
     const search = () => {
         const search = query.get('search')
@@ -27,13 +28,22 @@ const Search = () => {
         }
     }
 
+    const advancedSearch = () => {
+        const search = query.get('search')
+        if(search && search !== '') {
+            getAdvancedSearch(query.toString())
+        }
+    }
+
     const nextPage = (toPage) => {
         setQuery({search: query.get('search'), page: toPage})
     }
 
 
     useEffect(() => {
-        search()
+        if(query.get('page')) {
+            search()
+        }
     }, [query.get('page')])
 
     return (
@@ -41,8 +51,11 @@ const Search = () => {
             <div className="container">
                 <SearchForm 
                     search={search} 
+                    advancedSearch={advancedSearch}
                     setQuery={setQuery} 
                     query={query}
+                    setAdvancedQuery={setAdvancedQuery}
+                    advancedQuery={advancedQuery}
                 />
                 <Book 
                     title="Found" 

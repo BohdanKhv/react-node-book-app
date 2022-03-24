@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { RangeSlider } from '../'
 import './styles/searchForm.css'
 
-const SearchForm = ({ query, setQuery, search }) => {
+const SearchForm = ({ query, setQuery, search, setAdvancedQuery, advancedQuery, advancedSearch }) => {
 
     const [ displayAdvanced, setDisplayAnvanced ] = useState(false)
 
@@ -18,7 +18,7 @@ const SearchForm = ({ query, setQuery, search }) => {
         <section>
             <div className="search-form">
                 <button 
-                    className="btn" 
+                    className="btn btn-primary" 
                     onClick={()=> { setDisplayAnvanced(!displayAdvanced) } }
                     title="Advanced Search"
                     style={{
@@ -31,7 +31,7 @@ const SearchForm = ({ query, setQuery, search }) => {
                     type="text" 
                     placeholder="Search" 
                     value={query.get('search')} 
-                    onChange={(e) => setQuery({search: e.currentTarget.value, page: query.get('page')})}
+                    onChange={(e) => setQuery({search: e.currentTarget.value})}
                     onClick={(e) => {window.scrollTo(0, e.pageY - 50)}}
                     style={{
                             borderTopRightRadius: displayAdvanced && '5px'
@@ -58,6 +58,10 @@ const SearchForm = ({ query, setQuery, search }) => {
                             max={2000}
                             step={5}
                             icon={"https://img.icons8.com/color/30/000000/single-page-mode.png"}
+                            advancedQuery={advancedQuery}
+                            setAdvancedQuery={setAdvancedQuery}
+                            query={query}
+                            name='NumOfPages'
                         />
                         <hr />
                         <RangeSlider
@@ -66,6 +70,10 @@ const SearchForm = ({ query, setQuery, search }) => {
                             max={5}
                             step={0.1}
                             icon={"https://img.icons8.com/fluency/30/000000/star.png"}
+                            advancedQuery={advancedQuery}
+                            setAdvancedQuery={setAdvancedQuery}
+                            query={query}
+                            name="Rating"
                         />
                         <hr />
                         <RangeSlider
@@ -74,6 +82,10 @@ const SearchForm = ({ query, setQuery, search }) => {
                             max={250000}
                             step={10}
                             icon={"https://img.icons8.com/external-those-icons-lineal-color-those-icons/30/000000/external-rating-feedback-those-icons-lineal-color-those-icons-1.png"}
+                            advancedQuery={advancedQuery}
+                            setAdvancedQuery={setAdvancedQuery}
+                            query={query}
+                            name="RatingCount"
                         />
                         <hr />
                         <RangeSlider
@@ -82,9 +94,21 @@ const SearchForm = ({ query, setQuery, search }) => {
                             max={2022}
                             step={1}
                             icon={"https://img.icons8.com/color/30/000000/tear-off-calendar--v1.png"}
+                            advancedQuery={advancedQuery}
+                            setAdvancedQuery={setAdvancedQuery}
+                            query={query}
+                            name="PublishDate"
                         />
                         <hr />
-                        <button className="btn btn-primary" onClick={()=> { console.log('search') }}>Search</button>
+                        <button className="btn btn-primary" onClick={ 
+                            () => { 
+                                advancedSearch();
+                                setQuery({
+                                    search: query.get('search'),
+                                    ...advancedQuery
+                                })
+                            } 
+                        }>Search</button>
                     </div>
                 </div>
             }

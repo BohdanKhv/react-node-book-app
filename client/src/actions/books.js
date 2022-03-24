@@ -47,10 +47,16 @@ const getBestOfTheYear = async (id) => {
     }
 }
 
+const getAdvancedSearch = async (data) => {
+    // const result = await axios.get(`${apiUrl}search?${data}`)
+    console.log(`${apiUrl}search?${data}`)
+}
+
 export {
     searchBooks,
     getGenres,
     getBooks,
     getBook,
-    getBestOfTheYear
+    getBestOfTheYear,
+    getAdvancedSearch
 }
