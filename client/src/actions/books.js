@@ -48,8 +48,13 @@ const getBestOfTheYear = async (id) => {
 }
 
 const getAdvancedSearch = async (data) => {
-    // const result = await axios.get(`${apiUrl}search?${data}`)
-    console.log(`${apiUrl}search?${data}`)
+    try {
+        const result = await axios.get(`${apiUrl + 'advancedsearch?' + data}`)
+        console.log(result.data)
+        return result.data
+    } catch (err) {
+        console.log(err)
+    }
 }
 
 export {

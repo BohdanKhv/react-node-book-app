@@ -39,6 +39,21 @@ const Book = ({ items, title, isLoading, isSearch }) => {
                                                 <img src="https://img.icons8.com/external-those-icons-lineal-color-those-icons/20/000000/external-rating-feedback-those-icons-lineal-color-those-icons-1.png" alt="star" />
                                                 {item.bookMeta?.ratingCount.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                                             </span>
+                                            {item.details.publishDate &&
+                                            <span>
+                                                <img src="https://img.icons8.com/color/30/000000/tear-off-calendar--v1.png" alt="star" />
+                                                {item.details.publishDate}
+                                            </span>
+                                            }
+                                            {item.details.numberOfPages && +item.details.numberOfPages > 0 ?
+                                                <span>
+                                                    {console.log(item.details.numberOfPages === 0)}
+                                                    <img src="https://img.icons8.com/color/30/000000/single-page-mode.png" alt="star" />
+                                                    {item.details.numberOfPages}
+                                                </span>
+                                                :
+                                                null
+                                            }
                                         </div>
                                         : item.category &&
                                         <div className="book-meta">
@@ -53,7 +68,7 @@ const Book = ({ items, title, isLoading, isSearch }) => {
                             </div>
                     )
                 })}
-                {isLoading && 
+                {isLoading ? 
                     [...Array(20).keys()].map((i) => {
                         return (
                             <div className="book blink" style={{['--order']: `${i}`}} key={`card-loading-${i}`}>
@@ -62,6 +77,8 @@ const Book = ({ items, title, isLoading, isSearch }) => {
                             </div>
                         )
                     })
+                    :
+                    null
                 }
                 {!isLoading && !isSearch && items && showGenreCount < items.length &&
                     <div className="book load-more" onClick={loadMore}>

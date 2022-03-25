@@ -270,7 +270,7 @@ const requestSearch = async (
 
 const advancedSearch = async (req, res) => {
     
-    if(!req.query.q) {
+    if(!req.query.search) {
         res.status(400).json({error: 'Search query is required. (q=query)'})
     }
 
@@ -282,7 +282,7 @@ const advancedSearch = async (req, res) => {
     const maxPublishDate = req.query.maxPublishDate || 2023
     const minNumOfPages = req.query.minNumOfPages || null
     const maxNumOfPages = req.query.maxNumOfPages || null
-    const q = req.query.q || '40k'
+    const q = req.query.search || '40k'
 
     const result = await axios.get(`https://www.goodreads.com/search?query=${q}`)
     const $ = cheerio.default.load(result.data)
@@ -301,7 +301,9 @@ const advancedSearch = async (req, res) => {
             maxNumOfPages,
         )
 
-    res.status(200).json({items: data, pages: 1})
+        // console.log(data)
+
+    res.status(200).json({items: data})
 
 }
 

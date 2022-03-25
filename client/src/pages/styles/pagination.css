@@ -54,6 +54,11 @@
     content: '•••';
 }
 
+.nwf {
+    margin: 50px auto;
+    text-align: center;
+}
+
 @media (max-width: 768px) {
     .rc-pagination li {
         margin: 0 5px;

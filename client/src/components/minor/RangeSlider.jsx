@@ -6,38 +6,40 @@ const RangeSlider = ({ label, step, min, max, icon, name, advancedQuery, setAdva
 
     const [display, setDisplay] = useState(false)
 
+    const resetState = () => {
+        setAdvancedQuery(prevState => {
+            return {
+                ...prevState,
+                ['min'+name]: +query.get('min'+name) || Math.round(min + ((max - min) * 0.25)),
+                ['max'+name]: +query.get('max'+name) || Math.round(max - ((max - min) * 0.25))
+            }
+        })
+    }
+
+    const cleanState = () => {
+        setAdvancedQuery( prevState => {
+            const state = { ...prevState };
+            delete state['min'+name]
+            delete state['max'+name]
+            return state;
+        })
+    }
+
     useEffect(() => {
         if(query.get('min'+name) || query.get('max'+name)) {
-            setDisplay(true)
-            setAdvancedQuery(prevState => {
-                return {
-                    ...prevState,
-                    ['min'+name]: +query.get('min'+name) || Math.round(min + ((max - min) * 0.25)),
-                    ['max'+name]: +query.get('max'+name) || Math.round(max - ((max - min) * 0.25))
-                }
-                })
+            setDisplay(true);
+            resetState();
         }
     }, [query])
 
     useEffect(() => {
 
         if(display) {
-            setAdvancedQuery(prevState => {
-                return {
-                    ...prevState,
-                    ['min'+name]: +query.get('min'+name) || Math.round(min + ((max - min) * 0.25)),
-                    ['max'+name]: +query.get('max'+name) || Math.round(max - ((max - min) * 0.25))
-                }
-            })
+            resetState();
         }
 
         if(!display) {
-            setAdvancedQuery(prevState => {
-                const state = { ...prevState };
-                delete state['min'+name]
-                delete state['max'+name]
-                return state;
-            })
+            cleanState();
         }
 
     }, [display])

@@ -2,16 +2,17 @@ import { useState } from 'react'
 import { RangeSlider } from '../'
 import './styles/searchForm.css'
 
-const SearchForm = ({ query, setQuery, search, setAdvancedQuery, advancedQuery, advancedSearch }) => {
+const SearchForm = ({ query, setQuery, search, setAdvancedQuery, advancedQuery }) => {
 
     const [ displayAdvanced, setDisplayAnvanced ] = useState(false)
+    const [searchQuery, setSearchQuery] = useState('')
 
     const submitSearch = () => {
-        search(); 
         setQuery({
-            search: query.get('search'), 
+            search: searchQuery, 
             page: 1
         });
+        search(); 
     }
 
     return (
@@ -30,8 +31,8 @@ const SearchForm = ({ query, setQuery, search, setAdvancedQuery, advancedQuery, 
                 <input 
                     type="text" 
                     placeholder="Search" 
-                    value={query.get('search')} 
-                    onChange={(e) => setQuery({search: e.currentTarget.value})}
+                    value={searchQuery} 
+                    onChange={(e) => setSearchQuery(e.currentTarget.value)}
                     onClick={(e) => {window.scrollTo(0, e.pageY - 50)}}
                     style={{
                             borderTopRightRadius: displayAdvanced && '5px'
@@ -102,9 +103,8 @@ const SearchForm = ({ query, setQuery, search, setAdvancedQuery, advancedQuery, 
                         <hr />
                         <button className="btn btn-primary" onClick={ 
                             () => { 
-                                advancedSearch();
                                 setQuery({
-                                    search: query.get('search'),
+                                    search: searchQuery,
                                     ...advancedQuery
                                 })
                             } 

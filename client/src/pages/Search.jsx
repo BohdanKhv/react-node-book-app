@@ -28,16 +28,21 @@ const Search = () => {
         }
     }
 
-    const advancedSearch = () => {
-        const search = query.get('search')
-        if(search && search !== '') {
-            getAdvancedSearch(query.toString())
-        }
-    }
-
     const nextPage = (toPage) => {
         setQuery({search: query.get('search'), page: toPage})
     }
+
+    useEffect(() => {
+        if(!query.has('page') && query.get('search') !== '') {
+            setIsLoading(true)
+            getAdvancedSearch(query.toString()).then( 
+                (res) => {
+                    console.log(res)
+                    setItems(res.items);
+                    setIsLoading(false);
+            } )
+        }
+    }, [query])
 
 
     useEffect(() => {
@@ -51,7 +56,6 @@ const Search = () => {
             <div className="container">
                 <SearchForm 
                     search={search} 
-                    advancedSearch={advancedSearch}
                     setQuery={setQuery} 
                     query={query}
                     setAdvancedQuery={setAdvancedQuery}
@@ -63,7 +67,12 @@ const Search = () => {
                     isLoading={isLoading} 
                     isSearch={true}
                 />
-                {!isLoading && pages && 
+                {isLoading ? 
+                    <h3 className="nwf blink">Searching . . .</h3>
+                : null}
+                {!isLoading && items && items.length === 0 ? 
+                    <h3 className="nwf">Nothing was found</h3>
+                    : !isLoading && pages ? 
                     <Pagination 
                         showLessItems
                         pageSize={20}
@@ -85,6 +94,7 @@ const Search = () => {
                             <a>{'>'}</a>
                         }
                     />
+                    : null
                 }
             </div>
         </section>
