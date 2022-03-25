@@ -44,7 +44,6 @@ const Search = () => {
         }
     }, [query])
 
-
     useEffect(() => {
         if(query.get('page')) {
             search()
