@@ -198,7 +198,9 @@ const requestSearch = async (
 
     const items = []
 
-    while(pageCount <= page && items.length < 10) {
+    while(pageCount <= page && items.length < 10 && (pageCount < 15 && items.length <= 6 )) {
+
+        let t0 = performance.now()
 
         try {
 
@@ -223,6 +225,8 @@ const requestSearch = async (
                     )
                     .catch(e => { return 0 })
                 }
+
+                // console.log(star, ratingCount, publishDate)
 
                 if (
                     star >= minRating && 
@@ -255,7 +259,12 @@ const requestSearch = async (
                 }
             })
 
-            console.log(items.length, 'item length')
+            // Debug only
+            // console.log(`Total Pages Found ${page}`, `Current Page ${pageCount}`)
+            // console.log(items.length, 'item length')
+            // let t1 = performance.now();
+            // console.log("Call took " + ((t1 - t0)/1000).toFixed(2) + " seconds.");
+
             pageCount++
         
         } catch(err) {

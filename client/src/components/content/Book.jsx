@@ -47,7 +47,6 @@ const Book = ({ items, title, isLoading, isSearch }) => {
                                             }
                                             {item.details.numberOfPages && +item.details.numberOfPages > 0 ?
                                                 <span>
-                                                    {console.log(item.details.numberOfPages === 0)}
                                                     <img src="https://img.icons8.com/color/30/000000/single-page-mode.png" alt="star" />
                                                     {item.details.numberOfPages}
                                                 </span>

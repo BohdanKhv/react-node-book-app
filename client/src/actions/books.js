@@ -49,11 +49,13 @@ const getBestOfTheYear = async (id) => {
 
 const getAdvancedSearch = async (data) => {
     try {
+        // console.log(data)
         const result = await axios.get(`${apiUrl + 'advancedsearch?' + data}`)
-        console.log(result.data)
+        // console.log(result.data)
         return result.data
     } catch (err) {
         console.log(err)
+        return {items: []}
     }
 }
 

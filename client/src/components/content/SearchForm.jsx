@@ -91,7 +91,7 @@ const SearchForm = ({ query, setQuery, search, setAdvancedQuery, advancedQuery }
                         <hr />
                         <RangeSlider
                             label="Year Published"
-                            min={1950}
+                            min={1990}
                             max={2022}
                             step={1}
                             icon={"https://img.icons8.com/color/30/000000/tear-off-calendar--v1.png"}
